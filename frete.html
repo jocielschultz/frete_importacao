@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Frete</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script>
+  </head>
+  <body>
+    <h1>Tabela para Calculo de Frete</h1>
+
+    <h2>Caixa 1</h2>
+    Dimensão 1 (cm):
+    <input
+      type="text"
+      id="cx1_dim1"
+      name="cx1_dim1"
+      placeholder="Dimensão 1(cm)"
+      onchange="calcularFrete()"
+    />
+
+    Dimensão 2 (cm):
+    <input
+      type="text"
+      id="cx1_dim2"
+      name="cx1_dim2"
+      placeholder="Dimensão 2(cm)"
+      onchange="calcularFrete()"
+    />
+
+    Dimensão 3 (cm):
+    <input
+      type="text"
+      id="cx1_dim3"
+      name="cx1_dim3"
+      placeholder="Dimensão 3(cm)"
+      onchange="calcularFrete()"
+    />
+
+    Peso(KG):
+    <input
+      type="text"
+      id="cx1_peso"
+      name="cx1_peso"
+      placeholder="Peso"
+      onchange="calcularFrete()"
+    />
+
+    <div>
+      Valor do Frete Caixa 1:
+      <div id="cx1_frete_dolar">$</div>
+      <div id="cx1_frete_real">R$</div>
+    </div>
+
+    <!--<h2>Caixa 2</h2>
+    Dimensão 1 (cm):
+    <input
+      type="text"
+      id="cx2_dim1"
+      name="cx2_dim1"
+      placeholder="Dimensão 1(cm)"
+      onchange="calcularFrete()"
+    />
+
+    Dimensão 2 (cm):
+    <input
+      type="text"
+      id="cx2_dim2"
+      name="cx2_dim2"
+      placeholder="Dimensão 2(cm)"
+      onchange="calcularFrete()"
+    />
+
+    Dimensão 3 (cm):
+    <input
+      type="text"
+      id="cx2_dim3"
+      name="cx2_dim3"
+      placeholder="Dimensão 3(cm)"
+      onchange="calcularFrete()"
+    />
+
+    Peso(KG):
+    <input
+      type="text"
+      id="cx2_peso"
+      name="cx2_peso"
+      placeholder="Peso"
+      onchange="calcularFrete()"
+    />
+
+    <div>
+      Valor do Frete Caixa 2:
+      <div id="cx2_frete_dolar">$</div>
+      <div id="cx2_frete_real">R$</div>
+    </div>
+
+    <h2>Caixa 3</h2>
+    Dimensão 1 (cm):
+    <input
+      type="text"
+      id="cx3_dim1"
+      name="cx3_dim1"
+      placeholder="Dimensão 1(cm)"
+      onchange="calcularFrete()"
+    />
+
+    Dimensão 2 (cm):
+    <input
+      type="text"
+      id="cx3_dim2"
+      name="cx3_dim2"
+      placeholder="Dimensão 2(cm)"
+      onchange="calcularFrete()"
+    />
+
+    Dimensão 3 (cm):
+    <input
+      type="text"
+      id="cx3_dim3"
+      name="cx3_dim3"
+      placeholder="Dimensão 3(cm)"
+      onchange="calcularFrete()"
+    />
+
+    Peso(KG):
+    <input
+      type="text"
+      id="cx3_peso"
+      name="cx3_peso"
+      placeholder="Peso"
+      onchange="calcularFrete()"
+    />
+
+    <div>
+      Valor do Frete Caixa 3:
+      <div id="cx3_frete_dolar">$</div>
+      <div id="cx3_frete_real">R$</div>
+    </div>
+
+    <h2>Caixa 4</h2>
+    Dimensão 1 (cm):
+    <input
+      type="text"
+      id="cx4_dim1"
+      name="cx4_dim1"
+      placeholder="Dimensão 1(cm)"
+      onchange="calcularFrete()"
+    />
+
+    Dimensão 2 (cm):
+    <input
+      type="text"
+      id="cx4_dim2"
+      name="cx4_dim2"
+      placeholder="Dimensão 2(cm)"
+      onchange="calcularFrete()"
+    />
+
+    Dimensão 3 (cm):
+    <input
+      type="text"
+      id="cx4_dim3"
+      name="cx4_dim3"
+      placeholder="Dimensão 3(cm)"
+      onchange="calcularFrete()"
+    />
+
+    Peso(KG):
+    <input
+      type="text"
+      id="cx4_peso"
+      name="cx4_peso"
+      placeholder="Peso"
+      onchange="calcularFrete()"
+    />
+
+    <div>
+      Valor do Frete Caixa 4:
+      <div id="cx4_frete_dolar">$</div>
+      <div id="cx4_frete_real">R$</div>
+    </div>
+
+    -->
+
+    <hr />
+    <div>
+      Valor Total do Frete:
+      <div id="frete_dolar">$</div>
+      <div id="frete_real">R$</div>
+    </div>
+  </body>
+</html>
