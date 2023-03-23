@@ -1,6 +1,15 @@
+function collapse(id) {
+  var cx = document.querySelector(id);
+  if (cx.style.display == "block") {
+    cx.style.display = "none";
+  } else {
+    cx.style.display = "block";
+  }
+}
+
 function calcularFrete() {
   //inicializacao das variáveis
-  const dolar = 5.2;
+  const dolar = Number(document.querySelector("#dolar").value);
 
   // formatar em dólar e real
   var locale = "en-US";

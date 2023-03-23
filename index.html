@@ -6,72 +6,99 @@
     <title>Frete</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
     <script src="main.js"></script>
   </head>
   <body>
-    <header>
-      <h1>Tabela para Calculo de Frete</h1>
-      <input
-        type="text"
-        id="dolar"
-        name="dolar"
-        placeholder="Dólar"
-        value="5.20"
-      />
-    </header>
-    <main>
+    <header
+      class="sticky top-0 bg-blue-600 z-50 w-full px-5 py-2 flex justify-between items-center"
+    >
+      <h1 class="text-2xl text-white font-bold p-4">Cálculo de Frete</h1>
       <div>
-        <h2>Caixa 1</h2>
-        Dimensão 1 (cm):
+        <span class="text-sm font-medium text-slate-700">Dólar:</span>
+        <input
+          type="text"
+          id="dolar"
+          name="dolar"
+          placeholder="Dólar"
+          value="5.20"
+          class="mt-1 px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500"
+        />
+      </div>
+    </header>
+
+    <main class="relative">
+      <div id="cx1">
+        <h2 class="text-xl px-4 font-medium">Caixa 1</h2>
+
+        <span class="text-sm font-medium text-slate-700">Dimensão 1 (cm):</span>
+
         <input
           type="text"
           id="cx1_dim1"
           name="cx1_dim1"
           placeholder="Dimensão 1(cm)"
           onchange="calcularFrete()"
+          class="mt-1 px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500"
         />
 
-        Dimensão 2 (cm):
+        <span class="text-sm font-medium text-slate-700">Dimensão 2 (cm):</span>
         <input
           type="text"
           id="cx1_dim2"
           name="cx1_dim2"
           placeholder="Dimensão 2(cm)"
           onchange="calcularFrete()"
+          class="mt-1 px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500"
         />
 
-        Dimensão 3 (cm):
+        <span class="text-sm font-medium text-slate-700">Dimensão 3 (cm):</span>
         <input
           type="text"
           id="cx1_dim3"
           name="cx1_dim3"
           placeholder="Dimensão 3(cm)"
           onchange="calcularFrete()"
+          class="mt-1 px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500"
         />
 
-        Peso(KG):
+        <span class="text-sm font-medium text-slate-700">Peso(KG):</span>
+
         <input
           type="text"
           id="cx1_peso"
           name="cx1_peso"
           placeholder="Peso"
           onchange="calcularFrete()"
+          class="mt-1 px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500"
         />
 
-        <div>
-          Valor do Frete Caixa 1:
-          <div id="cx1_frete_dolar">$</div>
-          <div id="cx1_frete_real">R$</div>
+        <div class="flex justify-between items-center">
+          <div>
+            <span class="text-sm font-medium text-slate-700"
+              >Valor do Frete Caixa 1:
+              <div class="inline" id="cx1_frete_dolar">$</div>
+              <div class="inline" id="cx1_frete_real">R$</div>
+            </span>
+          </div>
+
+          <div>
+            <span class="text-sm font-medium text-slate-700"
+              >Custo Final Importação Caixa 1:
+              <div class="inline" id="cx1_custo_final_importacao">R$</div>
+            </span>
+          </div>
         </div>
 
-        <div>
-          Custo Final Importação Caixa 1:
-          <div id="cx1_custo_final_importacao">R$</div>
-        </div>
-        <button type="button" onclick="collapse('#cx2')">+</button>
+        <button
+          class="inline rounded bg-blue px-6 pt-2.5 pb-2 text-xs font-medium uppercase transition duration-150 ease-in-out hover:bg-blue-600 focus:bg-blue-600 focus:outline-none focus:ring-0 active:bg-blue-700"
+          type="button"
+          onclick="collapse('#cx2')"
+        >
+          +
+        </button>
       </div>
-
-      <div id="cx2" style="display: none">
+      <div class="hidden" id="cx2">
         <h2>Caixa 2</h2>
         Dimensão 1 (cm):
         <input
@@ -114,10 +141,15 @@
           <div id="cx2_frete_dolar">$</div>
           <div id="cx2_frete_real">R$</div>
         </div>
-        <button type="button" onclick="collapse('#cx3')">+</button>
+        <button
+          class="inline rounded bg-blue px-6 pt-2.5 pb-2 text-xs font-medium uppercase transition duration-150 ease-in-out hover:bg-blue-600 focus:bg-blue-600 focus:outline-none focus:ring-0 active:bg-blue-700"
+          type="button"
+          onclick="collapse('#cx3')"
+        >
+          +
+        </button>
       </div>
-
-      <div id="cx3" style="display: none">
+      <div class="hidden" id="cx3">
         <h2>Caixa 3</h2>
         Dimensão 1 (cm):
         <input
@@ -160,10 +192,15 @@
           <div id="cx3_frete_dolar">$</div>
           <div id="cx3_frete_real">R$</div>
         </div>
-        <button type="button" onclick="collapse('#cx4')">+</button>
+        <button
+          class="inline rounded bg-blue px-6 pt-2.5 pb-2 text-xs font-medium uppercase transition duration-150 ease-in-out hover:bg-blue-600 focus:bg-blue-600 focus:outline-none focus:ring-0 active:bg-blue-700"
+          type="button"
+          onclick="collapse('#cx4')"
+        >
+          +
+        </button>
       </div>
-
-      <div id="cx4" style="display: none">
+      <div class="hidden" id="cx4">
         <h2>Caixa 4</h2>
         Dimensão 1 (cm):
         <input
@@ -200,6 +237,7 @@
           placeholder="Peso"
           onchange="calcularFrete()"
         />
+
         <div>
           Valor do Frete Caixa 4:
           <div id="cx4_frete_dolar">$</div>
@@ -207,12 +245,18 @@
         </div>
       </div>
     </main>
-    <hr />
-    <footer>
+    <footer
+      class="fixed inset-x-0 bottom-0 bg-blue-600 z-50 w-full px-5 py-2 flex justify-between items-center"
+    >
       <div>
         Valor Total do Frete:
         <div id="frete_dolar">$</div>
         <div id="frete_real">R$</div>
+      </div>
+
+      <div>
+        Custo Final Importação:
+        <div id="custo_final_importacao">R$</div>
       </div>
     </footer>
   </body>
