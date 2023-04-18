@@ -6,210 +6,489 @@
     <title>Frete</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+
+    <script
+  src="https://code.jquery.com/jquery-3.6.4.slim.min.js"
+  integrity="sha256-a2yjHM4jnF9f54xUQakjZGaqYs/V1CYvWpoqZzC2/Bw="
+  crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css"
+    />
+
     <script src="main.js"></script>
   </head>
   <body>
     <header>
-      <h1>Tabela para Calculo de Frete</h1>
+      <!--<h3>Tabela para Calculo de Frete</h3>
       <input
         type="text"
+        class="form-control"
         id="dolar"
         name="dolar"
         placeholder="Dólar"
-        value="5.20"
-      />
+      /> -->
     </header>
-    <main>
-      <div>
-        <h2>Caixa 1</h2>
-        Dimensão 1 (cm):
-        <input
-          type="text"
-          id="cx1_dim1"
-          name="cx1_dim1"
-          placeholder="Dimensão 1(cm)"
-          onchange="calcularFrete()"
-        />
-
-        Dimensão 2 (cm):
-        <input
-          type="text"
-          id="cx1_dim2"
-          name="cx1_dim2"
-          placeholder="Dimensão 2(cm)"
-          onchange="calcularFrete()"
-        />
-
-        Dimensão 3 (cm):
-        <input
-          type="text"
-          id="cx1_dim3"
-          name="cx1_dim3"
-          placeholder="Dimensão 3(cm)"
-          onchange="calcularFrete()"
-        />
-
-        Peso(KG):
-        <input
-          type="text"
-          id="cx1_peso"
-          name="cx1_peso"
-          placeholder="Peso"
-          onchange="calcularFrete()"
-        />
-
-        <div>
-          Valor do Frete Caixa 1:
-          <div id="cx1_frete_dolar">$</div>
-          <div id="cx1_frete_real">R$</div>
+    <main class="content">
+      <div class="container">
+        <div id="alert" class="callout callout-danger" style="display: none">
+          <h5>Atenção!</h5>
+          <p id="msg">...</p>
         </div>
 
-        <div>
-          Custo Final Importação Caixa 1:
-          <div id="cx1_custo_final_importacao">R$</div>
+        <div class="card card-primary">
+          <div class="card-header">
+            <div class="row">
+              <div class="col-6">
+                <h3 class="card-title">Caixa 1</h3>
+              </div>
+              <div class="col-5">
+                <input type="hidden" id="dolar" name="dolar" />
+              </div>
+              <div class="col-1">
+                <h3 class="card-title">
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    onclick="abrir('#cx2')"
+                  >
+                    +
+                  </button>
+                </h3>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-body">
+            <div class="row">
+              <div class="col-3">
+                <label>Altura (cm)</label>
+                <input
+                  type="number"
+                  min="1"
+                  maxlength="3"
+                  class="form-control"
+                  id="cx1_dim1"
+                  name="cx1_dim1"
+                  placeholder="Altura (cm)"
+                  aria-describedby="cx1_dim1-error"
+                />
+                <span id="cx1_dim1-error" class="error invalid-feedback"
+                  >Informe o valor</span
+                >
+              </div>
+              <div class="col-3">
+                <label>Largura (cm)</label>
+                <input
+                  type="number"
+                  min="1"
+                  maxlength="3"
+                  class="form-control"
+                  id="cx1_dim2"
+                  name="cx1_dim2"
+                  placeholder="Largura (cm)"
+                  aria-describedby="cx1_dim2-error"
+                />
+                <span id="cx1_dim2-error" class="error invalid-feedback"
+                  >Informe o valor</span
+                >
+              </div>
+              <div class="col-3">
+                <label>Comprimento (cm)</label>
+                <input
+                  type="number"
+                  min="1"
+                  maxlength="3"
+                  class="form-control"
+                  id="cx1_dim3"
+                  name="cx1_dim3"
+                  placeholder="Comprimento (cm)"
+                  aria-describedby="cx1_dim3-error"
+                />
+                <span id="cx1_dim3-error" class="error invalid-feedback"
+                  >Informe o valor</span
+                >
+              </div>
+              <div class="col-3">
+                <label>Peso (kg)</label>
+                <input
+                  type="number"
+                  min="1"
+                  maxlength="3"
+                  class="form-control"
+                  id="cx1_peso"
+                  name="cx1_peso"
+                  placeholder="Peso (kg)"
+                  aria-describedby="cx1_peso-error"
+                />
+                <span id="cx1_peso-error" class="error invalid-feedback"
+                  >Informe o valor</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="total_frete1" style="display: none">
+            <div>
+              Valor do Frete Caixa 1:
+              <div id="cx1_frete_dolar">$</div>
+              <div id="cx1_frete_real">R$</div>
+            </div>
+
+            <div>
+              Custo Final Importação Caixa 1:
+              <div id="cx1_custo_final_importacao">R$</div>
+            </div>
+          </div>
         </div>
-        <button type="button" onclick="collapse('#cx2')">+</button>
+
+        <div id="cx2" class="card card-primary" style="display: none">
+          <div class="card-header">
+            <div class="row">
+              <div class="col-6">
+                <h3 class="card-title">Caixa 2</h3>
+              </div>
+              <div class="col-5"></div>
+              <div class="col-1">
+                <h3 class="card-title">
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    onclick="abrir('#cx3')"
+                  >
+                    +
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    onclick="fechar('#cx2')"
+                  >
+                    x
+                  </button>
+                </h3>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-body">
+            <div class="row">
+              <div class="col-3">
+                <label>Altura (cm)</label>
+                <input
+                  type="number"
+                  min="1"
+                  maxlength="3"
+                  class="form-control"
+                  id="cx2_dim1"
+                  name="cx2_dim1"
+                  placeholder="Altura (cm)"
+                  aria-describedby="cx2_dim1-error"
+                />
+                <span id="cx2_dim1-error" class="error invalid-feedback"
+                  >Informe o valor</span
+                >
+              </div>
+              <div class="col-3">
+                <label>Largura (cm)</label>
+                <input
+                  type="number"
+                  min="1"
+                  maxlength="3"
+                  class="form-control"
+                  id="cx2_dim2"
+                  name="cx2_dim2"
+                  placeholder="Largura (cm)"
+                  aria-describedby="cx2_dim2-error"
+                />
+                <span id="cx2_dim2-error" class="error invalid-feedback"
+                  >Informe o valor</span
+                >
+              </div>
+              <div class="col-3">
+                <label>Comprimento (cm)</label>
+                <input
+                  type="number"
+                  min="1"
+                  maxlength="3"
+                  class="form-control"
+                  id="cx2_dim3"
+                  name="cx2_dim3"
+                  placeholder="Comprimento (cm)"
+                  aria-describedby="cx2_dim3-error"
+                />
+                <span id="cx2_dim3-error" class="error invalid-feedback"
+                  >Informe o valor</span
+                >
+              </div>
+              <div class="col-3">
+                <label>Peso (kg)</label>
+                <input
+                  type="number"
+                  min="1"
+                  maxlength="3"
+                  class="form-control"
+                  id="cx2_peso"
+                  name="cx2_peso"
+                  placeholder="Peso (kg)"
+                  aria-describedby="cx2_peso-error"
+                />
+                <span id="cx2_peso-error" class="error invalid-feedback"
+                  >Informe o valor</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="total_frete2" style="display: none">
+            <div>
+              Valor do Frete Caixa 2:
+              <div id="cx2_frete_dolar">$</div>
+              <div id="cx2_frete_real">R$</div>
+            </div>
+          </div>
+        </div>
+
+        <div id="cx3" class="card card-primary" style="display: none">
+          <div class="card-header">
+            <div class="row">
+              <div class="col-6">
+                <h3 class="card-title">Caixa 3</h3>
+              </div>
+              <div class="col-5"></div>
+              <div class="col-1">
+                <h3 class="card-title">
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    onclick="abrir('#cx4')"
+                  >
+                    +
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    onclick="fechar('#cx3')"
+                  >
+                    x
+                  </button>
+                </h3>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-body">
+            <div class="row">
+              <div class="col-3">
+                <label>Altura (cm)</label>
+                <input
+                  type="number"
+                  min="1"
+                  maxlength="3"
+                  class="form-control"
+                  id="cx3_dim1"
+                  name="cx3_dim1"
+                  placeholder="Altura (cm)"
+                  aria-describedby="cx3_dim1-error"
+                />
+                <span id="cx3_dim1-error" class="error invalid-feedback"
+                  >Informe o valor</span
+                >
+              </div>
+              <div class="col-3">
+                <label>Largura (cm)</label>
+                <input
+                  type="number"
+                  min="1"
+                  maxlength="3"
+                  class="form-control"
+                  id="cx3_dim2"
+                  name="cx3_dim2"
+                  placeholder="Largura (cm)"
+                  aria-describedby="cx3_dim2-error"
+                />
+                <span id="cx3_dim2-error" class="error invalid-feedback"
+                  >Informe o valor</span
+                >
+              </div>
+              <div class="col-3">
+                <label>Comprimento (cm)</label>
+                <input
+                  type="number"
+                  min="1"
+                  maxlength="3"
+                  class="form-control"
+                  id="cx3_dim3"
+                  name="cx3_dim3"
+                  placeholder="Comprimento (cm)"
+                  aria-describedby="cx3_dim3-error"
+                />
+                <span id="cx3_dim3-error" class="error invalid-feedback"
+                  >Informe o valor</span
+                >
+              </div>
+              <div class="col-3">
+                <label>Peso (kg)</label>
+                <input
+                  type="number"
+                  min="1"
+                  maxlength="3"
+                  class="form-control"
+                  id="cx3_peso"
+                  name="cx3_peso"
+                  placeholder="Peso (kg)"
+                  aria-describedby="cx3_peso-error"
+                />
+                <span id="cx3_peso-error" class="error invalid-feedback"
+                  >Informe o valor</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="total_frete3" style="display: none">
+            <div>
+              Valor do Frete Caixa 3:
+              <div id="cx3_frete_dolar">$</div>
+              <div id="cx3_frete_real">R$</div>
+            </div>
+          </div>
+        </div>
+
+        <div id="cx4" class="card card-primary" style="display: none">
+          <div class="card-header">
+            <div class="row">
+              <div class="col-6">
+                <h3 class="card-title">Caixa 4</h3>
+              </div>
+              <div class="col-5"></div>
+              <div class="col-1">
+                <div class="col-1">
+                  <h3 class="card-title">
+                    <button
+                      type="button"
+                      class="btn btn-primary"
+                      onclick="fechar('#cx4')"
+                    >
+                      x
+                    </button>
+                  </h3>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-body">
+            <div class="row">
+              <div class="col-3">
+                <label>Altura (cm)</label>
+                <input
+                  type="number"
+                  min="1"
+                  maxlength="3"
+                  class="form-control"
+                  id="cx4_dim1"
+                  name="cx4_dim1"
+                  placeholder="Altura (cm)"
+                  aria-describedby="cx4_dim1-error"
+                />
+                <span id="cx4_dim1-error" class="error invalid-feedback"
+                  >Informe o valor</span
+                >
+              </div>
+              <div class="col-3">
+                <input
+                  type="number"
+                  min="1"
+                  maxlength="3"
+                  class="form-control"
+                  id="cx4_dim2"
+                  name="cx4_dim2"
+                  placeholder="Largura (cm)"
+                  aria-describedby="cx4_dim2-error"
+                />
+                <span id="cx4_dim2-error" class="error invalid-feedback"
+                  >Informe o valor</span
+                >
+              </div>
+              <div class="col-3">
+                <input
+                  type="number"
+                  min="1"
+                  maxlength="3"
+                  class="form-control"
+                  id="cx4_dim3"
+                  name="cx4_dim3"
+                  placeholder="Comprimento (cm)"
+                  aria-describedby="cx4_dim3-error"
+                />
+                <span id="cx4_dim3-error" class="error invalid-feedback"
+                  >Informe o valor</span
+                >
+              </div>
+              <div class="col-3">
+                <label>Peso (kg)</label>
+                <input
+                  type="number"
+                  min="1"
+                  maxlength="3"
+                  class="form-control"
+                  id="cx4_peso"
+                  name="cx4_peso"
+                  placeholder="Peso (kg)"
+                  aria-describedby="cx4_peso-error"
+                />
+                <span id="cx4_peso-error" class="error invalid-feedback"
+                  >Informe o valor</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="total_frete4" style="display: none">
+            <div>
+              Valor do Frete Caixa 4:
+              <div id="cx4_frete_dolar">$</div>
+              <div id="cx4_frete_real">R$</div>
+            </div>
+          </div>
+        </div>
+        <div class="card card-primary">
+          <button
+            type="button"
+            class="btn btn-primary"
+            id="cx1"
+            onclick="calcularFreteFinal()"
+          >
+          Calcular
+        </button>
       </div>
 
-      <div id="cx2" style="display: none">
-        <h2>Caixa 2</h2>
-        Dimensão 1 (cm):
-        <input
-          type="text"
-          id="cx2_dim1"
-          name="cx2_dim1"
-          placeholder="Dimensão 1(cm)"
-          onchange="calcularFrete()"
-        />
-
-        Dimensão 2 (cm):
-        <input
-          type="text"
-          id="cx2_dim2"
-          name="cx2_dim2"
-          placeholder="Dimensão 2(cm)"
-          onchange="calcularFrete()"
-        />
-
-        Dimensão 3 (cm):
-        <input
-          type="text"
-          id="cx2_dim3"
-          name="cx2_dim3"
-          placeholder="Dimensão 3(cm)"
-          onchange="calcularFrete()"
-        />
-
-        Peso(KG):
-        <input
-          type="text"
-          id="cx2_peso"
-          name="cx2_peso"
-          placeholder="Peso"
-          onchange="calcularFrete()"
-        />
-
-        <div>
-          Valor do Frete Caixa 2:
-          <div id="cx2_frete_dolar">$</div>
-          <div id="cx2_frete_real">R$</div>
-        </div>
-        <button type="button" onclick="collapse('#cx3')">+</button>
-      </div>
-
-      <div id="cx3" style="display: none">
-        <h2>Caixa 3</h2>
-        Dimensão 1 (cm):
-        <input
-          type="text"
-          id="cx3_dim1"
-          name="cx3_dim1"
-          placeholder="Dimensão 1(cm)"
-          onchange="calcularFrete()"
-        />
-
-        Dimensão 2 (cm):
-        <input
-          type="text"
-          id="cx3_dim2"
-          name="cx3_dim2"
-          placeholder="Dimensão 2(cm)"
-          onchange="calcularFrete()"
-        />
-
-        Dimensão 3 (cm):
-        <input
-          type="text"
-          id="cx3_dim3"
-          name="cx3_dim3"
-          placeholder="Dimensão 3(cm)"
-          onchange="calcularFrete()"
-        />
-
-        Peso(KG):
-        <input
-          type="text"
-          id="cx3_peso"
-          name="cx3_peso"
-          placeholder="Peso"
-          onchange="calcularFrete()"
-        />
-
-        <div>
-          Valor do Frete Caixa 3:
-          <div id="cx3_frete_dolar">$</div>
-          <div id="cx3_frete_real">R$</div>
-        </div>
-        <button type="button" onclick="collapse('#cx4')">+</button>
-      </div>
-
-      <div id="cx4" style="display: none">
-        <h2>Caixa 4</h2>
-        Dimensão 1 (cm):
-        <input
-          type="text"
-          id="cx4_dim1"
-          name="cx4_dim1"
-          placeholder="Dimensão 1(cm)"
-          onchange="calcularFrete()"
-        />
-
-        Dimensão 2 (cm):
-        <input
-          type="text"
-          id="cx4_dim2"
-          name="cx4_dim2"
-          placeholder="Dimensão 2(cm)"
-          onchange="calcularFrete()"
-        />
-
-        Dimensão 3 (cm):
-        <input
-          type="text"
-          id="cx4_dim3"
-          name="cx4_dim3"
-          placeholder="Dimensão 3(cm)"
-          onchange="calcularFrete()"
-        />
-
-        Peso(KG):
-        <input
-          type="text"
-          id="cx4_peso"
-          name="cx4_peso"
-          placeholder="Peso"
-          onchange="calcularFrete()"
-        />
-        <div>
-          Valor do Frete Caixa 4:
-          <div id="cx4_frete_dolar">$</div>
-          <div id="cx4_frete_real">R$</div>
-        </div>
+      <footer id="footer" style="display: none">
+        <h4 id="dolar_hoje"></h4>
+        <table
+          id="tabela"
+          class="table table-hover text-nowrap"
+        >
+          <thead>
+            <tr>
+              <th>Caixa</th>
+              <th>Frete (USD)</th>
+              <th>Frete (R$)</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+          <tfoot>
+            <tr>
+              <td>Total</td>
+              <td><span id="total_frete_dolar"></span></td>
+              <td><span id="total_frete_real"></span></td>
+            </tr>
+          </tfoot>
+        </table>
       </div>
     </main>
-    <hr />
-    <footer>
-      <div>
+      <div style="display: none">
         Valor Total do Frete:
         <div id="frete_dolar">$</div>
         <div id="frete_real">R$</div>
