@@ -336,7 +336,7 @@ function calcularCondicaoCalculo(dim1, dim2, dim3, peso) {
 
   var message = "";
   //Pelo menos 1 lado acima de 100cm (ate 150cm)
-  if (dim1 > 150 || dim2 > 150 || dim3 > 15) {
+  if (dim1 > 150 || dim2 > 150 || dim3 > 150) {
     message += "Valor máximo de 150cm. <br>";
   }
   //soma dos lados (SL) maior que 200cm (ate 350cm)
