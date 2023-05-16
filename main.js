@@ -139,6 +139,7 @@ function calcularFreteFinal() {
 }
 
 function exibirTabelaFinal(valoresFrete) {
+  //console.log(valoresFrete);
   var tabela = document.querySelector("#footer");
   tabela.style.display = "block";
 
@@ -157,6 +158,7 @@ function exibirTabelaFinal(valoresFrete) {
   var formatter = new Intl.NumberFormat(locale, options);
 
   var valorTotal = 0;
+  var valorTotalProduto = 0;
   document.getElementById("tabela").getElementsByTagName("tbody")[0].remove();
 
   document.getElementById("tabela").createTBody();
@@ -173,7 +175,8 @@ function exibirTabelaFinal(valoresFrete) {
 
     // Caixa
     var newCellCaixa = newRow.insertCell();
-    var newTextCaixa = document.createTextNode(`Caixa ${frete.caixa}`);
+
+    var newTextCaixa = document.createTextNode(`${frete.caixa.slice(-1)}`);
     newCellCaixa.appendChild(newTextCaixa);
 
     // Frete dólar
@@ -196,6 +199,25 @@ function exibirTabelaFinal(valoresFrete) {
     newCellFreteReal.appendChild(newTextFreteReal);
 
     console.log(frete.frete_dolar, dolar);
+
+    // Produto R$
+    var newCellProdutoReal = newRow.insertCell();
+    var newTextProdutoReal = document.createTextNode(
+      `${formatterBR.format(frete.custo_final_importacao * dolar)}`
+    );
+    newCellProdutoReal.appendChild(newTextProdutoReal);
+
+    // Total R$
+    var newCellTotal = newRow.insertCell();
+    var newTextTotal = document.createTextNode(
+      `${formatterBR.format(
+        (frete.custo_final_importacao + frete.frete_dolar) * dolar
+      )}`
+    );
+    newCellTotal.appendChild(newTextTotal);
+
+    //console.log(frete.frete_dolar, dolar);
+
     // Condição
     /*    var newCellCondicao = newRow.insertCell();
     var newTextCondicao = document.createTextNode(`Condição ${frete.condicao}`);
@@ -210,6 +232,7 @@ function exibirTabelaFinal(valoresFrete) {
     */
 
     valorTotal += frete.frete_dolar;
+    valorTotalProduto += frete.custo_final_importacao;
   });
 
   var totalFreteDolar = document.querySelector("#total_frete_dolar");
@@ -217,6 +240,16 @@ function exibirTabelaFinal(valoresFrete) {
 
   var totalFreteReal = document.querySelector("#total_frete_real");
   totalFreteReal.innerHTML = `${formatterBR.format(valorTotal * dolar)}`;
+
+  var totalProdutoReal = document.querySelector("#total_produto_real");
+  totalProdutoReal.innerHTML = `${formatterBR.format(
+    valorTotalProduto * dolar
+  )}`;
+
+  var totalFinal = document.querySelector("#total_final");
+  totalFinal.innerHTML = `${formatterBR.format(
+    (valorTotalProduto + valorTotal) * dolar
+  )}`;
 }
 
 function calcularFreteIndividual(id) {
@@ -239,7 +272,8 @@ function calcularFreteIndividual(id) {
     var condicao = 0;
 
     //custo final importacao
-    var valor_produto = 0;
+    var valor_produto = Number(document.querySelector(`#${id}_produto`).value);
+    //console.log(valor_produto);
     var custo_final_importacao = 0;
 
     if (cx_fator_multiplicador_frete > 0) {
@@ -266,11 +300,11 @@ function calcularFreteIndividual(id) {
       cx_frete_real.innerHTML = formatterBR.format(valor_frete_real);
   */
       //custo_importacao
-      /*custo_final_importacao = calcularCustoFinalImportacao(
+      custo_final_importacao = calcularCustoFinalImportacao(
         condicao,
-        valor_frete_real
+        valor_frete
       );
-
+      /*
       var cx_custo_final_importacao = document.querySelector(
         `#${id}_custo_final_importacao`
       );
@@ -279,12 +313,13 @@ function calcularFreteIndividual(id) {
       );
         */
 
-      valor_total += valor_frete;
+      //valor_total += valor_frete;
 
       return {
         caixa: id,
         frete_dolar: valor_frete,
         condicao: condicao,
+        custo_final_importacao: custo_final_importacao,
       };
     }
     return false;
@@ -293,9 +328,12 @@ function calcularFreteIndividual(id) {
 }
 
 function calcularValorFrete(condicao, soma_lados, peso) {
+  console.log(condicao, " soma", soma_lados, " peso", peso);
+
   var valor_frete = 0;
   var fator_multiplicador_frete = soma_lados * peso;
 
+  console.log("fator", fator_multiplicador_frete);
   if (condicao == 1) {
     //y = (3E-16x5 - 7E-12x4 + 6E-08x3 - 0.0002x2 + 0.4264x + 26.61)2
     //=((3E-016)*F5^5 - (0,000000000007)*F5^4 + (0,00000006)*F5^3 - (0,0002)*F5^2 + (0,4264)*F5 + 26,61)/2
@@ -308,6 +346,17 @@ function calcularValorFrete(condicao, soma_lados, peso) {
         0.4264 * fator_multiplicador_frete +
         26.61) /
       2;
+
+    //const resultado = ((3e-16) * Math.pow(F5, 5) - (0.000000000007) * Math.pow(F5, 4) + (0.00000006) * Math.pow(F5, 3) - (0.0002) * Math.pow(F5, 2) + (0.4264) * F5 + 26.61) / 2;
+
+    console.log(
+      0.00000000000003 * Math.pow(fator_multiplicador_frete, 5) -
+        0.000000000007 * Math.pow(fator_multiplicador_frete, 4) +
+        0.00000006 * Math.pow(fator_multiplicador_frete, 3) -
+        0.0002 * Math.pow(fator_multiplicador_frete, 2) +
+        0.4264 * fator_multiplicador_frete +
+        26.61
+    );
   } else if (condicao == 2) {
     //y = (3E-16x5 - 7E-12x4 + 6E-08x3 - 0.0002x2 + 0.4264x + 26.61)/1.7
     //=((3E-016)*F5^5 - (0,000000000007)*F5^4 + (0,00000006)*F5^3 - (0,0002)*F5^2 + (0,4264)*F5 + 26,61)/1,7
@@ -319,6 +368,15 @@ function calcularValorFrete(condicao, soma_lados, peso) {
         0.4264 * fator_multiplicador_frete +
         26.61) /
       1.7;
+    console.log("valor", valor_frete);
+    console.log(
+      0.00000000000003 * Math.pow(fator_multiplicador_frete, 5) -
+        0.000000000007 * Math.pow(fator_multiplicador_frete, 4) +
+        0.00000006 * Math.pow(fator_multiplicador_frete, 3) -
+        0.0002 * Math.pow(fator_multiplicador_frete, 2) +
+        0.4264 * fator_multiplicador_frete +
+        26.61
+    );
   } else if (condicao == 3) {
     //y = 944.5941176+((SL-200)*10)+( (Peso-30)*25 )
     valor_frete = 944.5941176 + (soma_lados - 200) * 10 + (peso - 30) * 25;
@@ -379,7 +437,6 @@ function calcularCondicaoCalculo(dim1, dim2, dim3, peso) {
 
 function calcularCustoFinalImportacao(condicao, valor_frete) {
   var valor_produto = 0;
-  var dolar = 5.2;
 
   var custo_final = 0;
   var taxa = 0;

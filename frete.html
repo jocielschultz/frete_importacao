@@ -61,7 +61,28 @@
           </div>
 
           <div class="card-body">
+
             <div class="row">
+              <div class="col-12">
+                <label>Valor do produto ($)</label>
+                <input
+                  type="text"
+                  min="1"
+                  maxlength="3"
+                  class="form-control"
+                  id="cx1_produto"
+                  name="cx1_produto"
+                  placeholder="Valor ($)"
+                  value="10"
+                  aria-describedby="cx1_produto-error"
+                />
+                <span id="cx1_produto-error" class="error invalid-feedback"
+                  >Informe o valor</span
+                >
+              </div>
+            </div>
+
+            <div class="row mt-1">
               <div class="col-sm-3 col-6">
                 <label>Altura (cm)</label>
                 <input
@@ -72,6 +93,7 @@
                   id="cx1_dim1"
                   name="cx1_dim1"
                   placeholder="Altura (cm)"
+                  value="10"
                   aria-describedby="cx1_dim1-error"
                 />
                 <span id="cx1_dim1-error" class="error invalid-feedback"
@@ -88,6 +110,7 @@
                   id="cx1_dim2"
                   name="cx1_dim2"
                   placeholder="Largura (cm)"
+                  value="10"
                   aria-describedby="cx1_dim2-error"
                 />
                 <span id="cx1_dim2-error" class="error invalid-feedback"
@@ -104,6 +127,7 @@
                   id="cx1_dim3"
                   name="cx1_dim3"
                   placeholder="Comprimento (cm)"
+                  value="10"
                   aria-describedby="cx1_dim3-error"
                 />
                 <span id="cx1_dim3-error" class="error invalid-feedback"
@@ -120,6 +144,7 @@
                   id="cx1_peso"
                   name="cx1_peso"
                   placeholder="Peso (kg)"
+                  value="2"
                   aria-describedby="cx1_peso-error"
                 />
                 <span id="cx1_peso-error" class="error invalid-feedback"
@@ -173,6 +198,24 @@
 
           <div class="card-body">
             <div class="row">
+              <div class="col-12">
+                <label>Valor do produto ($)</label>
+                <input
+                  type="text"
+                  min="1"
+                  maxlength="3"
+                  class="form-control"
+                  id="cx2_produto"
+                  name="cx2_produto"
+                  placeholder="Valor ($)"
+                  aria-describedby="cx2_produto-error"
+                />
+                <span id="cx2_produto-error" class="error invalid-feedback"
+                  >Informe o valor</span
+                >
+              </div>
+            </div>
+            <div class="row mt-1">
               <div class="col-sm-3 col-6">
                 <label>Altura (cm)</label>
                 <input
@@ -279,6 +322,25 @@
 
           <div class="card-body">
             <div class="row">
+              <div class="col-12">
+                <label>Valor do produto ($)</label>
+                <input
+                  type="text"
+                  min="1"
+                  maxlength="3"
+                  class="form-control"
+                  id="cx3_produto"
+                  name="cx3_produto"
+                  placeholder="Valor ($)"
+                  aria-describedby="cx3_produto-error"
+                />
+                <span id="cx3_produto-error" class="error invalid-feedback"
+                  >Informe o valor</span
+                >
+              </div>
+            </div>
+
+            <div class="row mt-1">
               <div class="col-sm-3 col-6">
                 <label>Altura (cm)</label>
                 <input
@@ -378,6 +440,24 @@
 
           <div class="card-body">
             <div class="row">
+              <div class="col-sm-6 col-12">
+                <label>Valor do produto ($)</label>
+                <input
+                  type="text"
+                  min="1"
+                  maxlength="3"
+                  class="form-control"
+                  id="cx4_produto"
+                  name="cx4_produto"
+                  placeholder="Valor ($)"
+                  aria-describedby="cx4_produto-error"
+                />
+                <span id="cx4_produto-error" class="error invalid-feedback"
+                  >Informe o valor</span
+                >
+              </div>
+            </div>
+            <div class="row mt-1">
               <div class="col-sm-3 col-6">
                 <label>Altura (cm)</label>
                 <input
@@ -466,7 +546,7 @@
       </div>
 
       <footer id="footer" style="display: none">
-        <h4 id="dolar_hoje"></h4>
+        <h5 id="dolar_hoje"></h5>
         <table
           id="tabela"
           class="table table-hover text-nowrap"
@@ -476,6 +556,8 @@
               <th>Caixa</th>
               <th>Frete (USD)</th>
               <th>Frete (R$)</th>
+              <th>Produto (R$)</th>
+              <th>Total (R$)</th>
             </tr>
           </thead>
           <tbody></tbody>
@@ -484,6 +566,8 @@
               <td>Total</td>
               <td><span id="total_frete_dolar"></span></td>
               <td><span id="total_frete_real"></span></td>
+              <td><span id="total_produto_real"></span></td>
+              <td><span id="total_final"></span></td>
             </tr>
           </tfoot>
         </table>
