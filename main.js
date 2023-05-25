@@ -339,7 +339,7 @@ function calcularValorFrete(condicao, soma_lados, peso) {
     //=((3E-016)*F5^5 - (0,000000000007)*F5^4 + (0,00000006)*F5^3 - (0,0002)*F5^2 + (0,4264)*F5 + 26,61)/2
 
     valor_frete =
-      (0.00000000000003 * Math.pow(fator_multiplicador_frete, 5) -
+      (0.0000000000000003 * Math.pow(fator_multiplicador_frete, 5) -
         0.000000000007 * Math.pow(fator_multiplicador_frete, 4) +
         0.00000006 * Math.pow(fator_multiplicador_frete, 3) -
         0.0002 * Math.pow(fator_multiplicador_frete, 2) +
@@ -348,20 +348,11 @@ function calcularValorFrete(condicao, soma_lados, peso) {
       2;
 
     //const resultado = ((3e-16) * Math.pow(F5, 5) - (0.000000000007) * Math.pow(F5, 4) + (0.00000006) * Math.pow(F5, 3) - (0.0002) * Math.pow(F5, 2) + (0.4264) * F5 + 26.61) / 2;
-
-    console.log(
-      0.00000000000003 * Math.pow(fator_multiplicador_frete, 5) -
-        0.000000000007 * Math.pow(fator_multiplicador_frete, 4) +
-        0.00000006 * Math.pow(fator_multiplicador_frete, 3) -
-        0.0002 * Math.pow(fator_multiplicador_frete, 2) +
-        0.4264 * fator_multiplicador_frete +
-        26.61
-    );
   } else if (condicao == 2) {
     //y = (3E-16x5 - 7E-12x4 + 6E-08x3 - 0.0002x2 + 0.4264x + 26.61)/1.7
     //=((3E-016)*F5^5 - (0,000000000007)*F5^4 + (0,00000006)*F5^3 - (0,0002)*F5^2 + (0,4264)*F5 + 26,61)/1,7
     valor_frete =
-      (0.00000000000003 * Math.pow(fator_multiplicador_frete, 5) -
+      (0.0000000000000003 * Math.pow(fator_multiplicador_frete, 5) -
         0.000000000007 * Math.pow(fator_multiplicador_frete, 4) +
         0.00000006 * Math.pow(fator_multiplicador_frete, 3) -
         0.0002 * Math.pow(fator_multiplicador_frete, 2) +
@@ -369,14 +360,6 @@ function calcularValorFrete(condicao, soma_lados, peso) {
         26.61) /
       1.7;
     console.log("valor", valor_frete);
-    console.log(
-      0.00000000000003 * Math.pow(fator_multiplicador_frete, 5) -
-        0.000000000007 * Math.pow(fator_multiplicador_frete, 4) +
-        0.00000006 * Math.pow(fator_multiplicador_frete, 3) -
-        0.0002 * Math.pow(fator_multiplicador_frete, 2) +
-        0.4264 * fator_multiplicador_frete +
-        26.61
-    );
   } else if (condicao == 3) {
     //y = 944.5941176+((SL-200)*10)+( (Peso-30)*25 )
     valor_frete = 944.5941176 + (soma_lados - 200) * 10 + (peso - 30) * 25;
