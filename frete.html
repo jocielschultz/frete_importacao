@@ -8,9 +8,10 @@
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
 
     <script
-  src="https://code.jquery.com/jquery-3.6.4.slim.min.js"
-  integrity="sha256-a2yjHM4jnF9f54xUQakjZGaqYs/V1CYvWpoqZzC2/Bw="
-  crossorigin="anonymous"></script>
+      src="https://code.jquery.com/jquery-3.6.4.slim.min.js"
+      integrity="sha256-a2yjHM4jnF9f54xUQakjZGaqYs/V1CYvWpoqZzC2/Bw="
+      crossorigin="anonymous"
+    ></script>
     <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
     <link
       rel="stylesheet"
@@ -52,9 +53,11 @@
                     type="button"
                     class="btn btn-success border border-white m-2"
                     onclick="abrir('#cx2')"
-                    data-toggle="tooltip" data-placement="top" title="Adicionar nova caixa"
+                    data-toggle="tooltip"
+                    data-placement="top"
+                    title="Adicionar nova caixa"
                   >
-                    + 
+                    +
                   </button>
                 </h3>
               </div>
@@ -62,26 +65,6 @@
           </div>
 
           <div class="card-body">
-
-            <div class="row">
-              <div class="col-12">
-                <label>Valor do produto ($)</label>
-                <input
-                  type="text"
-                  min="1"
-                  maxlength="3"
-                  class="form-control"
-                  id="cx1_produto"
-                  name="cx1_produto"
-                  placeholder="Valor ($)"
-                  aria-describedby="cx1_produto-error"
-                />
-                <span id="cx1_produto-error" class="error invalid-feedback"
-                  >Informe o valor</span
-                >
-              </div>
-            </div>
-
             <div class="row mt-1">
               <div class="col-sm-3 col-6">
                 <label>Altura (cm)</label>
@@ -177,7 +160,9 @@
                     type="button"
                     class="btn btn-success border border-white m-2"
                     onclick="abrir('#cx3')"
-                    data-toggle="tooltip" data-placement="top" title="Adicionar nova caixa"
+                    data-toggle="tooltip"
+                    data-placement="top"
+                    title="Adicionar nova caixa"
                   >
                     +
                   </button>
@@ -185,7 +170,9 @@
                     type="button"
                     class="btn btn-danger border border-white"
                     onclick="fechar('#cx2')"
-                    data-toggle="tooltip" data-placement="top" title="Excluir caixa"
+                    data-toggle="tooltip"
+                    data-placement="top"
+                    title="Excluir caixa"
                   >
                     x
                   </button>
@@ -195,24 +182,6 @@
           </div>
 
           <div class="card-body">
-            <div class="row">
-              <div class="col-12">
-                <label>Valor do produto ($)</label>
-                <input
-                  type="text"
-                  min="1"
-                  maxlength="3"
-                  class="form-control"
-                  id="cx2_produto"
-                  name="cx2_produto"
-                  placeholder="Valor ($)"
-                  aria-describedby="cx2_produto-error"
-                />
-                <span id="cx2_produto-error" class="error invalid-feedback"
-                  >Informe o valor</span
-                >
-              </div>
-            </div>
             <div class="row mt-1">
               <div class="col-sm-3 col-6">
                 <label>Altura (cm)</label>
@@ -303,7 +272,9 @@
                     type="button"
                     class="btn btn-success border border-white m-2"
                     onclick="abrir('#cx4')"
-                    data-toggle="tooltip" data-placement="top" title="Adicionar nova caixa"
+                    data-toggle="tooltip"
+                    data-placement="top"
+                    title="Adicionar nova caixa"
                   >
                     +
                   </button>
@@ -311,7 +282,9 @@
                     type="button"
                     class="btn btn-danger border border-white"
                     onclick="fechar('#cx3')"
-                    data-toggle="tooltip" data-placement="top" title="Excluir caixa"
+                    data-toggle="tooltip"
+                    data-placement="top"
+                    title="Excluir caixa"
                   >
                     x
                   </button>
@@ -321,25 +294,6 @@
           </div>
 
           <div class="card-body">
-            <div class="row">
-              <div class="col-12">
-                <label>Valor do produto ($)</label>
-                <input
-                  type="text"
-                  min="1"
-                  maxlength="3"
-                  class="form-control"
-                  id="cx3_produto"
-                  name="cx3_produto"
-                  placeholder="Valor ($)"
-                  aria-describedby="cx3_produto-error"
-                />
-                <span id="cx3_produto-error" class="error invalid-feedback"
-                  >Informe o valor</span
-                >
-              </div>
-            </div>
-
             <div class="row mt-1">
               <div class="col-sm-3 col-6">
                 <label>Altura (cm)</label>
@@ -427,10 +381,12 @@
               <div class="col-3 col-sm-2 d-flex justify-content-end">
                 <h3 class="card-title">
                   <button
-                      type="button"
-                      class="btn btn-danger border border-white p-2"
-                      onclick="fechar('#cx4')"
-                      data-toggle="tooltip" data-placement="top" title="Excluir caixa"
+                    type="button"
+                    class="btn btn-danger border border-white p-2"
+                    onclick="fechar('#cx4')"
+                    data-toggle="tooltip"
+                    data-placement="top"
+                    title="Excluir caixa"
                   >
                     x
                   </button>
@@ -440,24 +396,6 @@
           </div>
 
           <div class="card-body">
-            <div class="row">
-              <div class="col-sm-6 col-12">
-                <label>Valor do produto ($)</label>
-                <input
-                  type="text"
-                  min="1"
-                  maxlength="3"
-                  class="form-control"
-                  id="cx4_produto"
-                  name="cx4_produto"
-                  placeholder="Valor ($)"
-                  aria-describedby="cx4_produto-error"
-                />
-                <span id="cx4_produto-error" class="error invalid-feedback"
-                  >Informe o valor</span
-                >
-              </div>
-            </div>
             <div class="row mt-1">
               <div class="col-sm-3 col-6">
                 <label>Altura (cm)</label>
@@ -535,19 +473,44 @@
             </div>
           </div>
         </div>
+
+        <div class="card card-primary">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-12">
+                <label>Valor do produto ($)</label>
+                <input
+                  type="text"
+                  min="1"
+                  maxlength="3"
+                  class="form-control"
+                  id="cx_produto"
+                  name="cx_produto"
+                  placeholder="Valor ($)"
+                  aria-describedby="cx1_produto-error"
+                />
+                <span id="cx_produto-error" class="error invalid-feedback"
+                  >Informe o valor</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div class="card card-primary">
           <button
             type="button"
             class="btn btn-primary"
-
             id="cx1"
             onclick="calcularFreteFinal()"
           >
-          Calcular
-        </button>
+            Calcular
+          </button>
+        </div>
       </div>
-
-      <footer id="footer" style="display: none">
+    </main>
+    <footer id="footer" style="display: none">
+      <div class="container">
         <h5 id="dolar_hoje"></h5>
         <table
           id="tabela"
@@ -558,8 +521,6 @@
               <th>Caixa</th>
               <th>Frete (USD)</th>
               <th>Frete (R$)</th>
-              <th>Produto (R$)</th>
-              <th>Total (R$)</th>
             </tr>
           </thead>
           <tbody></tbody>
@@ -568,17 +529,28 @@
               <td>Total</td>
               <td><span id="total_frete_dolar"></span></td>
               <td><span id="total_frete_real"></span></td>
+            </tr>
+            <tr>
+              <th>Valor Produto (R$)</th>
+              <th>Custo do Frete (R$)</th>
+              <th>
+                Custo Final Para Pagamento Cliente (R$)<br />(Não incluso o
+                valor do produto)
+              </th>
+            </tr>
+            <tr>
               <td><span id="total_produto_real"></span></td>
+              <td><span id="total_frete_real_importacao"></span></td>
               <td><span id="total_final"></span></td>
             </tr>
           </tfoot>
         </table>
-      </div>
-    </main>
-      <div style="display: none">
-        Valor Total do Frete:
-        <div id="frete_dolar">$</div>
-        <div id="frete_real">R$</div>
+
+        <div style="display: none">
+          Valor Total do Frete:
+          <div id="frete_dolar">$</div>
+          <div id="frete_real">R$</div>
+        </div>
       </div>
     </footer>
   </body>

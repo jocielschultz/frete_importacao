@@ -159,6 +159,10 @@ function exibirTabelaFinal(valoresFrete) {
 
   var valorTotal = 0;
   var valorTotalProduto = 0;
+
+  //valor produto
+  var custo_final_importacao = 0;
+
   document.getElementById("tabela").getElementsByTagName("tbody")[0].remove();
 
   document.getElementById("tabela").createTBody();
@@ -198,24 +202,14 @@ function exibirTabelaFinal(valoresFrete) {
     );
     newCellFreteReal.appendChild(newTextFreteReal);
 
-    console.log(frete.frete_dolar, dolar);
+    //custo_importacao
 
-    // Produto R$
-    var newCellProdutoReal = newRow.insertCell();
-    var newTextProdutoReal = document.createTextNode(
-      `${formatterBR.format(frete.custo_final_importacao * dolar)}`
+    custo_final_importacao = calcularCustoFinalImportacao(
+      frete.condicao,
+      frete.frete_dolar
     );
-    newCellProdutoReal.appendChild(newTextProdutoReal);
 
-    // Total R$
-    var newCellTotal = newRow.insertCell();
-    var newTextTotal = document.createTextNode(
-      `${formatterBR.format(
-        (frete.custo_final_importacao + frete.frete_dolar) * dolar
-      )}`
-    );
-    newCellTotal.appendChild(newTextTotal);
-
+    console.log(custo_final_importacao);
     //console.log(frete.frete_dolar, dolar);
 
     // Condição
@@ -232,7 +226,7 @@ function exibirTabelaFinal(valoresFrete) {
     */
 
     valorTotal += frete.frete_dolar;
-    valorTotalProduto += frete.custo_final_importacao;
+    valorTotalProduto += custo_final_importacao;
   });
 
   var totalFreteDolar = document.querySelector("#total_frete_dolar");
@@ -241,15 +235,21 @@ function exibirTabelaFinal(valoresFrete) {
   var totalFreteReal = document.querySelector("#total_frete_real");
   totalFreteReal.innerHTML = `${formatterBR.format(valorTotal * dolar)}`;
 
+  // Produto R$
+  var valor_produto = Number(document.querySelector(`#cx_produto`).value);
+
   var totalProdutoReal = document.querySelector("#total_produto_real");
-  totalProdutoReal.innerHTML = `${formatterBR.format(
-    valorTotalProduto * dolar
+  totalProdutoReal.innerHTML = `${formatterBR.format(valor_produto * dolar)}`;
+
+  var totalFreteRealImportacao = document.querySelector(
+    "#total_frete_real_importacao"
+  );
+  totalFreteRealImportacao.innerHTML = `${formatterBR.format(
+    valorTotal * dolar
   )}`;
 
   var totalFinal = document.querySelector("#total_final");
-  totalFinal.innerHTML = `${formatterBR.format(
-    (valorTotalProduto + valorTotal) * dolar
-  )}`;
+  totalFinal.innerHTML = `${formatterBR.format(valorTotalProduto * dolar)}`;
 }
 
 function calcularFreteIndividual(id) {
@@ -270,11 +270,6 @@ function calcularFreteIndividual(id) {
     var valor_frete = 0;
     var valor_frete_real = 0;
     var condicao = 0;
-
-    //custo final importacao
-    var valor_produto = Number(document.querySelector(`#${id}_produto`).value);
-    //console.log(valor_produto);
-    var custo_final_importacao = 0;
 
     if (cx_fator_multiplicador_frete > 0) {
       condicao = calcularCondicaoCalculo(cx_dim1, cx_dim2, cx_dim3, cx_peso);
@@ -299,11 +294,6 @@ function calcularFreteIndividual(id) {
       valor_frete_real = valor_frete * dolar;
       cx_frete_real.innerHTML = formatterBR.format(valor_frete_real);
   */
-      //custo_importacao
-      custo_final_importacao = calcularCustoFinalImportacao(
-        condicao,
-        valor_frete
-      );
       /*
       var cx_custo_final_importacao = document.querySelector(
         `#${id}_custo_final_importacao`
@@ -319,7 +309,7 @@ function calcularFreteIndividual(id) {
         caixa: id,
         frete_dolar: valor_frete,
         condicao: condicao,
-        custo_final_importacao: custo_final_importacao,
+        //custo_final_importacao: custo_final_importacao,
       };
     }
     return false;
@@ -419,7 +409,11 @@ function calcularCondicaoCalculo(dim1, dim2, dim3, peso) {
 }
 
 function calcularCustoFinalImportacao(condicao, valor_frete) {
-  var valor_produto = 0;
+  //var valor_produto = 0;
+  //custo final importacao
+  var valor_produto = Number(document.querySelector(`#cx_produto`).value);
+
+  var custo_final_importacao = 0;
 
   var custo_final = 0;
   var taxa = 0;
