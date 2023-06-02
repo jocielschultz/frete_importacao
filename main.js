@@ -62,12 +62,21 @@ function fechar(id) {
 }
 
 function validarCampos(id) {
+  var cx_produto = document.querySelector(`#cx_produto`);
+
   var cx_altura = document.querySelector(`#${id}_dim1`);
   var cx_largura = document.querySelector(`#${id}_dim2`);
   var cx_comprimento = document.querySelector(`#${id}_dim3`);
   var cx_peso = document.querySelector(`#${id}_peso`);
 
   var valido = true;
+
+  if (cx_produto.value == "" || Number(cx_produto.value) == 0) {
+    cx_produto.classList.add("is-invalid");
+    valido = false;
+  } else {
+    cx_produto.classList.remove("is-invalid");
+  }
 
   if (cx_altura.value == "" || Number(cx_altura.value) == 0) {
     cx_altura.classList.add("is-invalid");
