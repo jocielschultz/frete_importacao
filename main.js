@@ -142,8 +142,31 @@ function calcularFreteFinal() {
     }
   });
 
-  if (valoresFrete.length > 0) {
-    exibirTabelaFinal(valoresFrete);
+  // ordenar por preço
+  console.log("xx", valoresFrete);
+  valoresFrete.sort(function compare(a, b) {
+    if (a.frete_dolar > b.frete_dolar) return -1;
+    if (a.frete_dolar < b.frete_dolar) return 1;
+    return 0;
+  });
+
+  //calculo dos percentuais por preço
+  const valoresFinais = valoresFrete.map((frete, index) => {
+    if (index == 1) {
+      frete.frete_dolar = frete.frete_dolar * 0.6;
+    }
+
+    if (index == 2) {
+      frete.frete_dolar = frete.frete_dolar * 0.5;
+    }
+
+    if (index == 3) {
+      frete.frete_dolar = frete.frete_dolar * 0.4;
+    }
+  });
+
+  if (valoresFinais.length > 0) {
+    exibirTabelaFinal(valoresFinais);
   }
 }
 
@@ -218,7 +241,7 @@ function exibirTabelaFinal(valoresFrete) {
       frete.frete_dolar
     );
 
-    console.log(custo_final_importacao);
+    //console.log(custo_final_importacao);
     //console.log(frete.frete_dolar, dolar);
 
     // Condição
@@ -284,18 +307,6 @@ function calcularFreteIndividual(id) {
       condicao = calcularCondicaoCalculo(cx_dim1, cx_dim2, cx_dim3, cx_peso);
       valor_frete = calcularValorFrete(condicao, cx_soma_lados, cx_peso);
 
-      if (id == "cx2") {
-        valor_frete = valor_frete * 0.6;
-      }
-
-      if (id == "cx3") {
-        valor_frete = valor_frete * 0.5;
-      }
-
-      if (id == "cx4") {
-        valor_frete = valor_frete * 0.4;
-      }
-
       /*var cx_frete_dolar = document.querySelector(`#${id}_frete_dolar`);
       cx_frete_dolar.innerHTML = formatter.format(valor_frete);
 
@@ -327,12 +338,12 @@ function calcularFreteIndividual(id) {
 }
 
 function calcularValorFrete(condicao, soma_lados, peso) {
-  console.log(condicao, " soma", soma_lados, " peso", peso);
+  //console.log(condicao, " soma", soma_lados, " peso", peso);
 
   var valor_frete = 0;
   var fator_multiplicador_frete = soma_lados * peso;
 
-  console.log("fator", fator_multiplicador_frete);
+  //console.log("fator", fator_multiplicador_frete);
   if (condicao == 1) {
     //y = (3E-16x5 - 7E-12x4 + 6E-08x3 - 0.0002x2 + 0.4264x + 26.61)2
     //=((3E-016)*F5^5 - (0,000000000007)*F5^4 + (0,00000006)*F5^3 - (0,0002)*F5^2 + (0,4264)*F5 + 26,61)/2
