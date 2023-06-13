@@ -143,7 +143,6 @@ function calcularFreteFinal() {
   });
 
   // ordenar por preço
-  console.log("xx", valoresFrete);
   valoresFrete.sort(function compare(a, b) {
     if (a.frete_dolar > b.frete_dolar) return -1;
     if (a.frete_dolar < b.frete_dolar) return 1;
@@ -151,7 +150,7 @@ function calcularFreteFinal() {
   });
 
   //calculo dos percentuais por preço
-  const valoresFinais = valoresFrete.map((frete, index) => {
+  valoresFrete.map((frete, index) => {
     if (index == 1) {
       frete.frete_dolar = frete.frete_dolar * 0.6;
     }
@@ -165,13 +164,13 @@ function calcularFreteFinal() {
     }
   });
 
-  if (valoresFinais.length > 0) {
-    exibirTabelaFinal(valoresFinais);
+  if (valoresFrete.length > 0) {
+    exibirTabelaFinal(valoresFrete);
   }
 }
 
 function exibirTabelaFinal(valoresFrete) {
-  //console.log(valoresFrete);
+
   var tabela = document.querySelector("#footer");
   tabela.style.display = "block";
 
@@ -202,13 +201,13 @@ function exibirTabelaFinal(valoresFrete) {
   var tbodyRef = document
     .getElementById("tabela")
     .getElementsByTagName("tbody")[0];
-
+console.log(valoresFrete);
   valoresFrete.forEach((frete) => {
     // Insert a row at the end of table
     var newRow = tbodyRef.insertRow();
 
     // Insert a cell at the end of the row
-
+console.log(frete);
     // Caixa
     var newCellCaixa = newRow.insertCell();
 
