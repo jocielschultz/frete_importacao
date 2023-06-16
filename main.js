@@ -170,7 +170,6 @@ function calcularFreteFinal() {
 }
 
 function exibirTabelaFinal(valoresFrete) {
-
   var tabela = document.querySelector("#footer");
   tabela.style.display = "block";
 
@@ -201,15 +200,15 @@ function exibirTabelaFinal(valoresFrete) {
   var tbodyRef = document
     .getElementById("tabela")
     .getElementsByTagName("tbody")[0];
-console.log(valoresFrete);
+  //console.log(valoresFrete);
   valoresFrete.forEach((frete) => {
     // Insert a row at the end of table
-    var newRow = tbodyRef.insertRow();
+    //var newRow = tbodyRef.insertRow();
 
     // Insert a cell at the end of the row
-console.log(frete);
+    //console.log(frete);
     // Caixa
-    var newCellCaixa = newRow.insertCell();
+    /*var newCellCaixa = newRow.insertCell();
 
     var newTextCaixa = document.createTextNode(`${frete.caixa.slice(-1)}`);
     newCellCaixa.appendChild(newTextCaixa);
@@ -220,19 +219,19 @@ console.log(frete);
       `${formatter.format(frete.frete_dolar)}`
     );
     newCellFreteDolar.appendChild(newTextFreteDolar);
-
+*/
     // Dólar
     /*var newCellDolar = newRow.insertCell();
     var newTextDolar = document.createTextNode(`Dólar ${dolar}`);
     newCellDolar.appendChild(newTextDolar);
 */
     // Frete R$
-    var newCellFreteReal = newRow.insertCell();
+    /*  var newCellFreteReal = newRow.insertCell();
     var newTextFreteReal = document.createTextNode(
       `${formatterBR.format(frete.frete_dolar * dolar)}`
     );
     newCellFreteReal.appendChild(newTextFreteReal);
-
+*/
     //custo_importacao
 
     custo_final_importacao = calcularCustoFinalImportacao(
