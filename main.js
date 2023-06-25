@@ -259,6 +259,13 @@ function exibirTabelaFinal(valoresFrete) {
     valorTotalProduto += custo_final_importacao;
   });
 
+  if (valoresFrete.length > 1) {
+    valorTotalProduto = calcularCustoFinalImportacao(
+      4, // Produto Multiplas caixas
+      valorTotal
+    );
+  }
+
   var totalFreteDolar = document.querySelector("#total_frete_dolar");
   totalFreteDolar.innerHTML = `${formatter.format(valorTotal)}`;
 
@@ -442,9 +449,12 @@ function calcularCustoFinalImportacao(condicao, valor_frete) {
     taxa = 0.25;
   } else if (condicao == 3) {
     taxa = 0.22;
+  } else if (condicao == 4) {
+    taxa = 0.2;
   }
 
   //=(B9+C9)*0,22+C9+((B9+C9)*0,22+C9)*0,1
+
   custo_final =
     (valor_produto + valor_frete) * taxa +
     valor_frete +
