@@ -135,6 +135,12 @@ function calcularFreteFinal() {
 
   var valoresFrete = [];
 
+  var alert = document.querySelector("#alert");
+  alert.style.display = "none";
+
+  var msg = document.querySelector("#msg");
+  msg.innerHTML = '';
+
   caixas.forEach((cx) => {
     var valorFrete = calcularFreteIndividual(cx);
     if (valorFrete != false) {
@@ -309,8 +315,13 @@ function calcularFreteIndividual(id) {
     var condicao = 0;
 
     if (cx_fator_multiplicador_frete > 0) {
-      condicao = calcularCondicaoCalculo(cx_dim1, cx_dim2, cx_dim3, cx_peso);
-      valor_frete = calcularValorFrete(condicao, cx_soma_lados, cx_peso);
+      condicao = calcularCondicaoCalculo(cx_dim1, cx_dim2, cx_dim3, cx_peso, id);
+      
+      if (condicao>0) {
+        valor_frete = calcularValorFrete(condicao, cx_soma_lados, cx_peso);
+      } else {
+        return false;
+      }
 
       /*var cx_frete_dolar = document.querySelector(`#${id}_frete_dolar`);
       cx_frete_dolar.innerHTML = formatter.format(valor_frete);
@@ -383,10 +394,10 @@ function calcularValorFrete(condicao, soma_lados, peso) {
   return valor_frete;
 }
 
-function calcularCondicaoCalculo(dim1, dim2, dim3, peso) {
+function calcularCondicaoCalculo(dim1, dim2, dim3, peso, id) {
   var alert = document.querySelector("#alert");
-  alert.style.display = "none";
-
+  //alert.style.display = "none";
+  
   var soma_lados = dim1 + dim2 + dim3;
   var condicao = 0;
 
@@ -404,12 +415,13 @@ function calcularCondicaoCalculo(dim1, dim2, dim3, peso) {
   if (peso > 40) {
     message += "Peso máximo permitido de 40kg";
   }
-
+  
   if (message != "") {
-    alert.style.display = null;
+    alert.style.display = "block";
 
     var msg = document.querySelector("#msg");
-    msg.innerHTML = message;
+    msg.innerHTML += `Caixa ${id.substring(2,3)}: ${message}</br>`;
+    return condicao;
   }
 
   //Nenhum lado com valores acima ou igual a 70cm, peso igual ou inferior 30kg
